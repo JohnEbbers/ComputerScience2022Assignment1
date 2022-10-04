@@ -1,0 +1,23 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [61]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [62]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveBase": "Subsystem",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  }
+}

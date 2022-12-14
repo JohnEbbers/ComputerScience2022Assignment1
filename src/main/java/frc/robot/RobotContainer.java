@@ -4,14 +4,13 @@
 
 package frc.robot;
 
-import frc.robot.commands.ShootWithJoystick;
+import frc.robot.commands.ControlElevator;
 
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ShootBall;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -24,15 +23,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static final XboxController driverController = new XboxController(0);
-  private final Shooter m_shooter = new Shooter();
-
-  private final ShootBall m_autoCommand = new ShootBall(m_shooter);
+  private final Elevator m_elevator = new Elevator();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
-    m_shooter.setDefaultCommand(new ShootWithJoystick(m_shooter, () -> driverController.getLeftY()));
     // Configure the button bindings
     configureButtonBindings();
 
@@ -47,8 +42,7 @@ public class RobotContainer {
    * @param throttle 
    */
   private void configureButtonBindings() {
-    new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileHeld(new ShootBall(m_shooter));
-    //new JoystickButton(driverController, XboxController.Axis.kLeftY.value).whileHeld(new ShootWithJoystick(m_shooter, () -> driverController.getLeftY()));
+    new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileHeld(new ControlElevator(m_elevator));
   }
 
   /**
@@ -56,8 +50,4 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
 }
